@@ -1,0 +1,26 @@
+# ArgoCD Application: sample-app
+#
+# 리소스(Namespace 등)는 ArgoCD Sync 시점에 생성됨 (kubectl apply 시점 아님)
+# 적용: kubectl apply -f argocd/application-sample-app.yaml
+# 동기화: ArgoCD UI에서 Sync 또는 argocd app sync sample-app
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sample-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/argoproj/argocd-example-apps.git
+    path: kustomize-guestbook
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sample-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
