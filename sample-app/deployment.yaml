@@ -21,7 +21,7 @@ spec:
             - "-text=Hello! Sample App is running."
             - "-listen=:8080"
           ports:
-            - containerPort: 8080
+            - containerPort: 8090
           resources:
             requests:
               memory: "32Mi"
