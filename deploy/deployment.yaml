@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sk060-sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sk060-sample-app
+  template:
+    metadata:
+      labels:
+        app: sk060-sample-app
+    spec:
+      imagePullSecrets:
+        - name: harbor-secret
+      containers:
+        - name: sk060-sample-app
+          image: __IMAGE__
+          ports:
+            - containerPort: 80
